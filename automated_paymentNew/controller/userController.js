@@ -93,6 +93,7 @@ exports.signUp = async (req, res) => {
                     email: user.email,
                     phoneNumber: user.phoneNumber,
                     token: user.token,
+                    notificationPreference: user.notificationPreference
                 },
             })
 
