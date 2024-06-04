@@ -74,9 +74,33 @@ const validateUserLogin = (data) => {
 }
 
 
+const validateWallet = (data) => {
+    try {
+        const validateSchema = joi.object({
+            amount: joi.number().strict().required().min(0).messages({
+                'number.base': 'Amount must be a number!',
+                'any.required': 'Amount is required',
+                'number.min': 'Amount must be at least 0',
+            }),
+        email: joi.string().max(40).trim().email({ tlds: { allow: false } }).required().messages({
+            'string.empty': "Email field can't be left empty",
+            'any.required': "Please Email is required"
+        }),
+       
+    
+    });
+        return validateSchema.validate(data);
+    } catch (err) {
+        return res.status(500).json({
+            Error: "Error while validating user: " + err.message,
+        })
+    }
+}
+
 
 module.exports = {
     validateUser,
     validateUserLogin,
+    validateWallet
 
 }

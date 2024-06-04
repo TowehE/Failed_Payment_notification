@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const twilio = require ("twilio")
 const { CronJob } = require("cron")
 const nodemailer = require("nodemailer")
+const { sendEmail } = require("../email")
 require('dotenv').config()
 
 // my mobile number
@@ -27,22 +28,14 @@ async function sendNotification(user) {
             console.log('SMS notification sent to', user.phoneNumber);
         } else if (user.notificationPreference === "email") {
             // Send email notification
-            const transporter = nodemailer.createTransport({
-                service:process.env.service,
-                 auth: {
-                   user: process.env.user,
-                   pass: process.env.emailPassword,
-                  
-                 },
-               });
+            const subject= "Insuffcient Funds Notification"
+            const html = inSufficientFundEmail(user.firstName)
+            sendEmail({
+                email:user.email,
+                html,
+                subject
+            })
                 
-            const mailOptions = {
-                from: process.env.user,
-                to: user.email,
-                subject: 'Insufficient Funds',
-                html: inSufficientFundEmail(user.firstName,)
-            };
-            await transporter.sendMail(mailOptions);
             console.log('Email notification sent to', user.email);
         } else {
             console.log('No notification method specified for user', user.userId);
@@ -51,6 +44,8 @@ async function sendNotification(user) {
         console.error('Error sending notification:', error);
     }
 }
+
+
 
 
 
