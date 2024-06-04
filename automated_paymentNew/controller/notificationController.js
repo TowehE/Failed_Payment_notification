@@ -62,7 +62,7 @@ const job = new CronJob('*/5 * * * *', async () => {
 
         // Update balances for all users
         for (const user of users) {
-            const deductionAmount = 400;
+            const deductionAmount = 4000;
 
             if (user.balance < deductionAmount) {
                 await sendNotification(user); 
