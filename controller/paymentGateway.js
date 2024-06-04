@@ -95,7 +95,7 @@ const webhook = async (req, res) => {
 // Serve the payment form
 const startPayment = (req, res) => {
     res.send(`
-     
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
