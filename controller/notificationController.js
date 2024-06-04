@@ -55,28 +55,28 @@ async function sendNotification(user) {
 
 
 // Scheduled job to automatically deduct money from all user balances
-const job = new CronJob('*/5 * * * *', async () => { 
+const job = new CronJob('*/5 * * * *', async () => {
     try {
-        console.log('Automatic deduction job started.');
-        const users = await userModel.find();
-
-        // Update balances for all users
-        for (const user of users) {
-            const deductionAmount = 15000000;
-
-            if (user.balance < deductionAmount) {
-                await sendNotification(user); 
-            } else {
-                user.balance -= deductionAmount;
-                await user.save();
-                console.log(`Deducted ${deductionAmount} from user ${user.firstName}. New balance: ${user.balance}`);
-            }
+      console.log('Automatic deduction job started.');
+      const users = await userModel.find();
+  
+      // Update balances for all users
+      for (const user of users) {
+        const deductionAmount = 15000000;
+        user.balance -= deductionAmount;
+        await user.save();
+        console.log(`Deducted ${deductionAmount} from user ${user.firstName}. New balance: ${user.balance}`);
+  
+        // Check if balance is insufficient after deduction and send notification if needed
+        if (user.balance < deductionAmount) {
+          await sendNotification(user);
         }
-        console.log('Automatic deduction completed.');
+      }
+      console.log('Automatic deduction completed.');
     } catch (error) {
-        console.error('Scheduled job error:', error);
+      console.error('Scheduled job error:', error);
     }
-});
+  });
 
 module.exports = {
     job
