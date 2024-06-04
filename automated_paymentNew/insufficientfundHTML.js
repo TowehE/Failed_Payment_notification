@@ -18,6 +18,3 @@ const inSufficientFundEmail = (firstName) => {
   `;
   };
   
-  module.exports = { inSufficientFundEmail };
-  
-  
