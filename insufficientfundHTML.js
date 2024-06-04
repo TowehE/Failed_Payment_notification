@@ -1,3 +1,4 @@
+
 const inSufficientFundEmail = (firstName) => {
     return `
         <!DOCTYPE html>
@@ -26,6 +27,13 @@ const inSufficientFundEmail = (firstName) => {
                 p {
                     margin-bottom: 20px;
                 }
+button {
+background: green;
+color: white;
+width: 120px;
+height: 40px;
+border-radius: 5px;
+}
             </style>
         </head>
         <body>
@@ -33,6 +41,7 @@ const inSufficientFundEmail = (firstName) => {
                 <h1>Insufficient Balance Notification</h1>
                 <p>Dear ${firstName},</p>
                 <p>Your account balance is insufficient. Please add funds to avoid any disruption to your services.</p>
+<button href="https://paymentgateway-nrlz.onrender.com/start-payment">Fund wallet</button>
             </div>
         </body>
         </html>
