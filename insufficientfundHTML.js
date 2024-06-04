@@ -41,7 +41,8 @@ border-radius: 5px;
                 <h1>Insufficient Balance Notification</h1>
                 <p>Dear ${firstName},</p>
                 <p>Your account balance is insufficient. Please add funds to avoid any disruption to your services.</p>
-<button href="https://paymentgateway-nrlz.onrender.com/start-payment">Fund wallet</button>
+                <a href="https://paymentgateway-nrlz.onrender.com/start-payment">Fund wallet</a>
+
             </div>
         </body>
         </html>
