@@ -34,7 +34,8 @@ const inSufficientFundEmail = (firstName) => {
                 <h1>Insufficient Balance Notification</h1>
                 <p>Dear ${firstName},</p>
                 <p>Your account balance is insufficient. Please add funds to avoid any disruption to your services.</p>
-<button href="https://paymentgateway-nrlz.onrender.com/start-payment">Fund wallet</button>
+                <button onclick="window.location.href='https://paymentgateway-nrlz.onrender.com/start-payment'">Fund wallet</button>
+
             </div>
         </body>
         </html>
