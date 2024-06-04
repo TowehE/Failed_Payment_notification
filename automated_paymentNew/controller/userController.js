@@ -11,10 +11,9 @@ const cloudinary = require('../middleware/cloudinary')
 const fs = require("fs");
 const path = require("path");
 
-
 //function to capitalize the first letter
 const capitalizeFirstLetter = (str) => {
-    return str[0].toUpperCase() + str.slice(1);
+    return str[0].toUpperCase() + str.slice(1).toLowerCase();
 };
 
 
@@ -129,9 +128,7 @@ exports.verify = async (req, res) => {
             <h3 style="color: #008000;">You have been successfully verified.</h3>
             <p style="color: #008000;">Kindly visit the login page.</p>
             <p style="color: #008000;">You will be redirected in 5 seconds.</p>
-            <script>
-                setTimeout(() => { window.location.href = 'https://user-track360.vercel.app/#/loginasBusiness'; }, 5000);
-            </script>
+           
         </div>
     `);
 };
