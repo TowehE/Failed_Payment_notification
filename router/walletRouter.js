@@ -6,7 +6,7 @@ const { deposit} = require('../controller/walletController');
 const {authenticate} = require('../middleware/authentation');
 
 //endpoint to handle deposit money
-router.post("/deposit", deposit )
+router.post("/deposit",authenticate, deposit )
 
 
 
