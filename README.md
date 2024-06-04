@@ -5,10 +5,13 @@ This project implements a system for automatically deducting funds from user bal
 
 **Features:**
 
-•	Scheduled job automatically deducts a fixed amount from all user balances.
+•	Scheduled 20 minutes to runs cron job to automatically deducts a fixed amount from all user balances every 10 minutes.
+• Automatically deducts a fixed amount from user balances at regular intervals.
 •	User notification based on preferred method (phone or email).
 •	SMS notifications via Twilio (requires Twilio account and credentials).
 •	Email notifications via Nodemailer (requires email configuration).
+
+
 
 
 **Technology Stack:**
