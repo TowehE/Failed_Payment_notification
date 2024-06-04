@@ -1,7 +1,10 @@
 **Automatic Balance Deduction and Notification System**
+
+
 This project implements a system for automatically deducting funds from user balances and sending notifications if their balance is insufficient.
 
-Features:
+**Features:**
+
 •	Scheduled job automatically deducts a fixed amount from all user balances.
 •	User notification based on preferred method (phone or email).
 •	SMS notifications via Twilio (requires Twilio account and credentials).
@@ -21,6 +24,7 @@ Features:
 
 
 **Requirements**
+
 •	UserAuthentication
 •	User model with attributes like balance and notificationPreference
 •	Function (in insufficientfundHTML.js) to generate HTML template for email notification
@@ -28,6 +32,7 @@ Features:
 •	Email service provider and credentials (for email notifications)
 
 **Setup:**
+
 1.	Clone or download the project.
 2.	Install dependencies: npm install 
 3.	Configure environment variables in .env file: 
