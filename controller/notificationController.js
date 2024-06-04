@@ -14,6 +14,9 @@ const twiliomobileNumber =process.env.twiliomobileNumber
 const client = twilio(process.env.twilioAccountSid, 
     process.env.twilioAuthToken);
 
+    // Flag to indicate if the job is currently running
+let isJobRunning = false;
+
 
 // Function to send notification
 async function sendNotification(user) {
@@ -25,7 +28,7 @@ async function sendNotification(user) {
                 to: user.phoneNumber,
                 from: process.env.twiliomobileNumber 
             });
-            console.log('SMS notification sent to', user.phoneNumber);
+          
         } else if (user.notificationPreference === "email") {
             // Send email notification
             const subject= "Insuffcient Funds Notification"
@@ -36,7 +39,6 @@ async function sendNotification(user) {
                 subject
             })
                 
-            console.log('Email notification sent to', user.email);
         } else {
             console.log('No notification method specified for user', user.userId);
         }
@@ -50,41 +52,42 @@ async function sendNotification(user) {
 
 
 // Scheduled job to automatically deduct money from all user balances
-let isJobRunning = false;
+const job = new CronJob('*/10 * * * *', async () => {
+  
+    // Check if the job is already running
+    if (isJobRunning) {
+        console.log('Job is already running. Skipping this instance.');
+        return;
+    }
 
-const job = new CronJob('*/5 * * * *', async () => { 
     try {
-        if (isJobRunning) {
-            console.log('Job already running, skipping this execution.');
-            return;
-        }
-        
+        // Set the flag to indicate that the job is running
         isJobRunning = true;
         console.log('Automatic deduction job started.');
         const users = await userModel.find();
 
         // Update balances for all users
         for (const user of users) {
-            const deductionAmount = 150000;
+            const deductionAmount = 15000000;
 
             if (user.balance < deductionAmount) {
-                await sendNotification(user); 
+                await sendNotification(user);
             } else {
                 user.balance -= deductionAmount;
                 await user.save();
-                console.log(`Deducted ${deductionAmount} from user ${user.firstName}. New balance: ${user.balance}`);
+              
             }
         }
         console.log('Automatic deduction completed.');
     } catch (error) {
         console.error('Scheduled job error:', error);
     } finally {
+        // Reset the flag after job completion
         isJobRunning = false;
     }
+    
 });
-
 
 module.exports = {
     job
-}
-
+};
